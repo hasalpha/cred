@@ -1,0 +1,344 @@
+/* Section - Contacts Header */
+.contactsHeader{
+    padding: 5px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.contactsLimitCounter{
+  top: 50%;
+  right: 50px;
+  position: absolute;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.contactsAddIcon{
+    background-color: #ed642b;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.contactsAddIcon:hover{
+    background-color: #D94E32;
+}
+.contactsAddIconDisabled{
+  background-color: #808080;
+}
+.contactsAddIconDisabled:hover{
+  background-color: #a9a9a9;
+}
+.contacts_HLine{
+    border-bottom: 2.5px solid #eeeeee;
+}
+
+/* Section - No Saved Conctacts */
+.contactsNoSavedSection{
+  margin: 30px 0;
+}
+.contactsNoSaved{
+    padding: 5% 20%;
+    text-align: center;
+}
+.contactsAddButton{
+    padding: 8px 15px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #250c77;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+/* Sections - Add a Contact */
+.contactsAddSection{
+    margin: 30px 0;
+    border-radius: 6px;
+    background-color: #eeeeee;
+}
+.contactsAddForm{
+    padding: 10px 40px;
+    position: relative;
+}
+.contactsAddForm > h3{
+  font-weight: bold;
+}
+/* Contact Form Details */
+.contactsDeleteIcon{
+  top: 25px;
+  right: 25px;
+  transform: scale(1.5);
+  position: absolute;
+  color: #ff0000;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.contactsDeleteIcon:hover{
+  transform: scale(1.7);
+}
+.contactsFormDetails{
+  padding: 15px 0;
+  display: flex;
+  gap: 6%;
+}
+.contactsFormField{
+  padding: 10px;
+  width: 100%;
+  height: 35px;
+  border-radius: 25px;
+  border: 2px solid #ed642b;
+}
+.contactsFieldFormError{
+  display: block;
+  border: 2px solid #ff0000;
+}
+.contactsMSGFormError{
+  visibility: hidden;
+}
+.contactsFormDetails > div > label{
+  padding-left: 10px;
+  font-size: clamp(1rem, 1vw, 1.25rem);
+  color: black;
+}
+.contactsFormDetails > div > label > span{
+  color: #ed642b;
+}
+#contactsError{
+  padding-left: 10px;
+}
+.contactsFormDetails_A > div, .contactsFormDetails_B > div:nth-child(1){
+  width: 100%;
+}
+.contactsFormDetails_B > div:nth-child(2){
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* CC Toggle Btn */
+.contactsFormCCText{
+  text-align: center;
+  font-size: 1rem !important;
+  font-weight: bold;
+}
+.contactsFormCCTextBR{
+  display: none;
+}
+.contactsToggleBtn {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+}
+.contactsToggleBtn > input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.contactsSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #9E9E9E;
+  transition: .4s;
+  border-radius: 25px;
+}
+.contactsSlider:before {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 35px;
+  left: -10px;
+  bottom: -2px;
+  background-color: #ed642b;
+  transition: .4s;
+  border-radius: 50%;
+}
+.contactsSlider:hover:before{
+  background-color: #D94E32;
+}
+input:checked + .contactsSlider {
+  background-color: #250c77;
+}
+input:checked + .contactsSlider:before {
+  transform: translateX(35px);
+}
+/* Form Save Btn */
+.contactsAddBtn{
+  padding: 8px 50px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-100%);
+  border: none;
+  outline: none !important;
+  border-radius: 25px;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.contactSubmitBtnColor{
+  background-color: #250c77;
+  color: #ffffff;
+}
+
+/* Contacts Saved Cards */
+.contactsSavedSection{
+  margin: 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  /* overflow: hidden; */
+}
+.contactsSavedCard{
+  padding: 20px 30px;
+  position: relative;
+  flex: 0 0 calc(50% - 20px);
+  width: 30%;
+  height: calc(130px + 5vw);
+  display: flex;
+  border-radius: 6px;
+  background-color: #eeeeee;
+  /* overflow: hidden; */
+}
+.contactsOverlayCard{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  position: absolute;
+  border-radius: 6px;
+  background-color: rgb(238, 238, 238, 0.8);
+  cursor: wait;
+}
+.contactsCardDetails{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.contactsCardDetails > div > h3{
+  margin: 0 0 8px 0;
+  font-weight: bold;
+  font-size: clamp(1.2rem, 1.6vw, 2.2rem) !important;
+}
+.contactsCardInfo{
+  margin: 0;
+  padding-top: 10px;
+  font-size: clamp(1rem, 1vw, 2rem) !important;
+}
+.contentsEditIcon{
+  top: 20px;
+  right: 20px;
+  position: absolute;
+  color: #808080;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.contentsEditIcon:hover{
+  color: #ed642b;
+  transform: scale(1.2);
+}
+.contactsToggleBtnSize{
+  right: 35px;
+  bottom: 10px;
+  position: absolute;
+  transform: scale(0.8);
+}
+.contactsCCResult{
+  right: 25px;
+  bottom: 45px;
+  position: absolute;
+  color: black;
+  font-weight: bold;
+}
+
+/* Break Points... */
+@media (max-width: 992px) {
+  /* Contacts Saved Cards */
+  .contactsSavedCard{
+    flex: 1 0 100%;
+  }
+
+  /* Contact Form Details */
+  .contactsAddBtn{
+    padding: 8px 35px;
+  }
+  /* CC Toggle Btn */
+  .contactsFormCCTextBR{
+    display: inline;
+  }
+}
+@media (max-width: 767px) {
+  /* Section - Contacts Header */
+  .contactsAddIcon{
+    font-size: 1.85rem;
+  }
+
+  /* Sections - Add a Contact */
+  .contactsAddForm{
+    padding: 5px 15px;
+  }
+  /* Contact Form Details */
+  .contactsDeleteIcon{
+    top: 20px;
+    right: 20px;
+    transform: scale(1.3);
+  }
+  .contactsDeleteIcon:hover{
+    transform: scale(1.5);
+  }
+  .contactsFormDetails{
+    padding: 5px 0;
+    gap: 3%;
+  }
+  .contactsFormField{
+    height: 30px;
+  }
+  .contactsFormDetails_B > div:nth-child(2){
+    width: 40%;
+    transform: scale(0.8);
+  }
+  .contactsFormCCText{
+    font-size: 0.9rem !important;
+  }
+  /* Form Save Btn */
+  .contactsAddBtn{
+    padding: 6px 30px;
+    font-size: 1.15rem;
+  }
+
+  /* Contacts Saved Cards */
+  .contactsSavedCard{
+    padding: 15px 15px;
+  }
+  .contactsCardDetails > div > h3{
+    font-size: 1.1rem !important;
+  }
+  .contactsCardInfo{
+    padding-top: 10px;
+    font-size: 0.9rem !important;
+  }
+  .contentsEditIcon{
+    top: 15px;
+    right: 15px;
+  }
+  .contactsToggleBtnSize{
+    right: 17px;
+    bottom: 5px;
+    transform: scale(0.65);
+  }
+  .contactsCCResult{
+    right: 15px;
+    bottom: 36px;
+    font-size: 0.7rem !important;
+  }
+}

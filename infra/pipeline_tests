@@ -1,0 +1,7 @@
+#!/bin/bash
+npm run test
+if [ "$?" -ne 0 ]; then
+    exit 125;
+fi
+
+echo "Tests PASSED"

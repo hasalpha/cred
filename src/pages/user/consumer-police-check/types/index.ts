@@ -1,0 +1,11 @@
+export enum PoliceCheckStates {
+	'NONE' = 'NONE',
+	'BIOMETRIC' = 'BIOMETRIC',
+	'PERSONAL' = 'PERSONAL',
+	'ADDRESS' = 'ADDRESS',
+	'CRJMC' = 'CRJMC',
+	'IDENTITY' = 'IDENTITY',
+	'PREVIEW' = 'PREVIEW',
+	'PAYMENT' = 'PAYMENT',
+	'COMPLETED' = 'COMPLETED',
+}

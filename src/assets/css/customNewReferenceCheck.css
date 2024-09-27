@@ -1,0 +1,139 @@
+/* Toggle SMS Section */
+.sendSMSSection-Row{
+    display: flex;
+    gap: 0px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.sendSMSTitle-Row{
+    display: flex;
+    flex-direction: row;
+}
+
+/* Drop Down Section */
+.ShareResults-Row{
+    margin: 15px 35px 20px 15px;
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    gap: 25px;
+    align-items: center;
+}
+/* Drop Down Btn */
+.SRDropDownBtn{
+    padding-right: 18px;
+    position: relative;
+    border: none !important;
+    outline: none !important;
+    border-radius: 6px;
+    color: #250c77;
+}
+.SRDropDownArrow{
+    right: 2px;
+    bottom: 4px;
+    position: absolute;
+    color: #ed642b;
+}
+.SRDropDownBage{
+    top: 5px;
+    right: 5px;
+    position: absolute;
+}
+/* Drop Down Menu */
+.SRDropDownMenu .MuiMenu-root,
+.SRDropDownMenu .MuiPaper-root,
+.SRDropDownMenu .MuiList-padding {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+}
+.SRDropDownMenu .MuiMenuItem-root {
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+}
+/* Display No Item for Drop Down */
+.SRDropDownNoItems-Col{
+    margin: 15px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.SRDDNoItemInfo{
+    margin: 0 20px;
+}
+.SRDDNoItemBtn{
+    margin: 15px 55px 0 55px !important;
+    padding: 10px;
+    outline: none !important;
+    border: none !important;
+    border-radius: 25px;
+    background-color: #250C77;
+    color: #ffffff;
+    cursor: pointer;
+}
+/* Display Item for Drop Down */
+.SRDropDownItems-Col{
+    width: 300px;
+    display: flex;
+    background-color: #ffffff;
+}
+.SRDropDownItems-Col:hover{
+    background-color: #ffffff;
+}
+.SRDropDownCCards{
+    flex-grow: 1;
+    margin: 8px 8px;
+    padding: 0 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px #888888;
+    background-color: #ffffff;
+}
+.SRDropDownCCards:hover{
+    border: 0.667px solid #ed642b;
+}
+.SRDropDownCCardsSelected{
+    border: 2px solid #ed642b !important;
+    background-color: #ed642b29;
+}
+.SRDropDownCCards > h4, 
+.SRDropDownCCards > div{
+    margin: 8px 4px;
+    padding: 0;
+    font-size: 0.8rem;
+}
+.SRDropDownCCards > h4{
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: bold !important;
+}
+.SRDropDownCCards > div{
+    margin: 0 4px;
+    padding: 0;
+    font-weight: bold;
+    color: #250C77;
+}
+.SRDropDownCCards > div:last-child{
+    margin: 4px 4px 8px 4px;
+    color: red;
+}
+
+
+/* Break Points... */
+@media (max-width: 767px) {
+    /* Toggle SMS Section */
+    .sendSMSSection-Row{
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+
+    /* Drop Down Section */
+    .ShareResults-Row{
+        margin: 15px 35px 0 15px;
+        justify-content: space-between;
+    }
+}

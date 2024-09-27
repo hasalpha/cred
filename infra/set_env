@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Generate env file based on the deployment 
+# config set in bitbucket
+# Repository settings > deployments > ${ENVIROMENT} > Variables
+
+check_var() {
+    if [ -z "$1" ]; then 
+        exit 125; 
+    fi;
+}
+
+printf "\nGenerating environment file\n"
+
+check_var "$VITE_WEB_URL"
+echo -e "VITE_WEB_URL=${VITE_WEB_URL}" > .env
+
+check_var "$VITE_API_URL"
+echo -e "VITE_API_URL=${VITE_API_URL}" >> .env
+
+check_var "$VITE_SESSION_MAX_AGE"
+echo -e "VITE_SESSION_MAX_AGE=${VITE_SESSION_MAX_AGE}" >> .env

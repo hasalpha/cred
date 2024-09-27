@@ -1,0 +1,14 @@
+FROM selenium/standalone-firefox:latest
+
+# Set the environment variables for the Firefox version and language
+ENV FIREFOX_VERSION=latest \
+    LANGUAGE=en-US
+
+# Install the necessary packages and clean up the cache
+RUN apt-get update && apt-get install -y firefox=${FIREFOX_VERSION} \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Set the language for Firefox
+RUN localedef -i ${LANGUAGE} -f UTF-8 ${LANGUAGE}.UTF-8
+ENV LANG=${LANGUAGE}.UTF-8

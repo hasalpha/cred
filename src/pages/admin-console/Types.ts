@@ -1,0 +1,40 @@
+const clientObj = {
+	uuid: '4dae2c3e-a9eb-4f7d-9bb8-c299f221dbf9',
+	created_at: '2023-01-30T13:23:18.818113Z',
+	updated_at: '2023-05-25T08:53:21.539332Z',
+	country: 'Afghanistan',
+	state: 'Badakhshan',
+	organization: '323',
+	noOfStaff: '21-100',
+	is_active: true,
+	is_lead_generation_job: true,
+	is_lead_generation_candidate: true,
+	is_background_check: true,
+	app_logo: '',
+	app_domain: '',
+	app_title: '',
+	primary_btn_bg_color: '',
+	secondry_btn_bg_color: '',
+	primary_btn_txt_color: '',
+	secondry_btn_txt_color: '',
+	brand_primary_color: '',
+	brand_secondry_color: '',
+	brand_tertiary_color: '',
+	link_txt: '',
+	is_archived: false,
+	archived_at: '2023-07-24T11:49:09.291672Z',
+	white_label_enabled: true,
+};
+
+const flagObj = {
+	uuid: 'beab10b7-18ed-4e99-8865-5eb1a33c3e52',
+	created_at: '2023-08-16T15:21:47Z',
+	updated_at: '2023-08-18T12:19:34.600577Z',
+	name: 'Client Questionnaire',
+	note: '',
+	everyone: null,
+	users: [],
+	companies: ['dec5f3c7-8b73-4e7b-89c9-0cdb66452801'],
+};
+export type ClientObject = typeof clientObj;
+export type FlagObject = typeof flagObj;

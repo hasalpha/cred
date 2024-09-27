@@ -1,0 +1,164 @@
+image: node:lts
+options:
+  docker: true
+definitions:
+  Install: &install
+    name: 'Install dependencies'
+    caches:
+      - node
+    script:
+      - npm run ci
+    artifacts:
+      - node_modules/**
+  # load-docker-firefox: &load-docker-firefox
+  #   docker load < Dockerfile-firefox
+  Test: &test
+    name: 'Running tests'
+    script:
+      - infra/pipeline_tests
+  Ftest: &ftest
+    name: 'Running selenium functional tests'
+    script:
+      #    - *load-docker-firefox
+      - echo "Starting Selenium Firefox Standalone"
+      #- chmod +x test/functional_tests.sh
+      - cd test
+      - apt-get update && apt-get install -y wget tar
+      - wget
+        https://github.com/mozilla/geckodriver/releases/download/v0.32.1/geckodriver-v0.32.1-linux-aarch64.tar.gz
+      - tar -xzf geckodriver-v0.32.1-linux-aarch64.tar.gz
+      - npm install
+      - npm install selenium-webdriver
+      - npm install -g webdriver-manager
+      - npm install chromedriver
+      - npm install geckodriver
+      - npm install mozilla
+      - export DISPLAY=:99.0
+      - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+      - sleep 5
+      - echo "Running functional Tests"
+      - node sequence.cjs $ENVIRONMENT
+      - node credible-ft.cjs $ENVIRONMENT
+  Build-Deploy: &build-and-deploy
+    oidc: true
+    script:
+      # - infra/set_env
+      - unset CI # temporary until warnings are fixed
+      - npm run build:$ENVIRONMENT
+      - CI=true # debug
+      - pipe: atlassian/aws-s3-deploy:1.1.0
+        variables:
+          AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+          AWS_OIDC_ROLE_ARN: $AWS_OIDC_ROLE_ARN
+          S3_BUCKET: credibled-app-$ENVIRONMENT
+          LOCAL_PATH: 'build'
+
+  cf-invalidate: &cf-invalidate
+    oidc: true
+    script:
+      #- infra/set_env
+      # - export CF_DIST_ID_VAR=${ENVIRONMENT}_CF_DIST_ID
+      # - export CF_DIST_ID=${!CF_DIST_ID_VAR}
+      - echo "Invalidating cache for CDN - $CF_DIST_ID"
+      - pipe: atlassian/aws-cloudfront-invalidate:0.1.2
+        variables:
+          AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+          AWS_OIDC_ROLE_ARN: $AWS_OIDC_ROLE_ARN
+          DISTRIBUTION_ID: $CF_DIST_ID
+          PATHS: '/*' # Optional
+          #DEBUG: "<boolean>" # Optional
+
+pipelines:
+  pull-requests:
+    '**':
+      # Build and test for every PR raised
+      - step: *install
+      - step: *test
+  branches:
+    development:
+      # Build, test and deploy to dev for
+      # every merge to development
+      - step: *install
+      - step: *test
+      # - step: *ftest
+      - step:
+          <<: *build-and-deploy
+          name: 'Deploy to development environment'
+          deployment: Development
+          size: 2x
+      - step:
+          name: 'Invalidating CF Cache'
+          script:
+            - echo "Invalidating cache for CDN - $dev_CF_DIST_ID"
+            - pipe: atlassian/aws-cloudfront-invalidate:0.1.2
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                AWS_OIDC_ROLE_ARN: $AWS_OIDC_ROLE_ARN
+                DISTRIBUTION_ID: $dev_CF_DIST_ID
+                PATHS: '/*' # Optional
+                #DEBUG: "<boolean>" # Optional
+    mainline:
+      - step: *install
+      - step: *test
+      # - step: *ftest
+      - step:
+          <<: *build-and-deploy
+          name: 'Staging deployment'
+          deployment: Staging
+          size: 2x
+      - step:
+          name: 'Invalidating CF Cache'
+          script:
+            - echo "Invalidating cache for CDN - $staging_CF_DIST_ID"
+            - pipe: atlassian/aws-cloudfront-invalidate:0.1.2
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                AWS_OIDC_ROLE_ARN: $AWS_OIDC_ROLE_ARN
+                DISTRIBUTION_ID: $staging_CF_DIST_ID
+                PATHS: '/*' # Optional
+                #DEBUG: "<boolean>" # Optional
+      - step:
+          <<: *build-and-deploy
+          name: 'Production Deployment'
+          deployment: Production
+          trigger: manual
+          size: 2x
+      - step:
+          name: 'Invalidating CF Cache'
+          script:
+            - echo "Invalidating cache for CDN - $prod_CF_DIST_ID"
+            - pipe: atlassian/aws-cloudfront-invalidate:0.1.2
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                AWS_OIDC_ROLE_ARN: $AWS_OIDC_ROLE_ARN
+                DISTRIBUTION_ID: $prod_CF_DIST_ID
+                PATHS: '/*' # Optional
+                #DEBUG: "<boolean>" # Optional
+
+  custom:
+    hotfixdeploy:
+      - step: *install
+      - step: *test
+      # - step: *ftest
+      - step:
+          <<: *build-and-deploy
+          name: 'Deploy hotfix to Production environment'
+          deployment: Production
+          trigger: manual
+    invalidate_cf_cache:
+      - variables:
+          - name: ENVIRONMENT
+            default: prod
+            allowed-values:
+              - dev
+              - staging
+              - prod
+      - step:
+          name: 'Invalidating CF Cache'
+          <<: *cf-invalidate

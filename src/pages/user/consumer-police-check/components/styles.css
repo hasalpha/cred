@@ -1,0 +1,9 @@
+
+.signature {
+  display: block;
+  margin: 100px auto;
+  border: 2px solid orange;
+	border-radius: 8px;
+  width: 500px;
+  height: 200px;
+}

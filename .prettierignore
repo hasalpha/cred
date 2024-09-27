@@ -1,0 +1,9 @@
+node_modules
+coverage
+build
+firebase
+public
+*.css
+*.scss
+src/assets
+src/contexts/assets

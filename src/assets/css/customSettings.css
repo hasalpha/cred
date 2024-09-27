@@ -1,0 +1,91 @@
+.accountSettingsSections{
+    margin: 0 !important;
+    padding: 15px !important;
+    border-radius: 6px !important;
+    overflow: hidden;
+}
+.accountSettingsSection-Col{
+    display: flex;
+}
+.accountSettingsSection-Col > div > h5{
+    margin: 0 0 15px;
+}
+.accountSettingsMenu{
+    top: 50%;
+    right: -10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-bottom: 0px;
+    transform: translateY(-50%);
+    overflow: hidden;
+}
+.accountSettingsBtn{
+    width: 180px !important;
+    border-radius: 25px !important;
+    border-width: 2px !important;
+    color: black !important;
+    overflow: hidden;
+}
+
+
+/*  */
+.changePassDesktopView{
+    margin-top: 20px;
+}
+.changePassMobileView{
+    display: none;
+}
+
+/* .test123123123123{
+    margin-left: 10px !important;
+} */
+
+.test123123123123{
+    display: flex;
+    flex-direction: row;
+    /* column-gap: 10px; */
+
+    justify-content: space-evenly;
+}
+
+.test123123123123 > a{
+    width: 40%;
+    overflow: hidden;
+}
+
+/* Break Points... */
+@media (width < 900px) {
+    .test123123123123{
+        column-gap: 1%;
+        justify-content: center;
+    }
+    .test123123123123 > a{
+        width: 45%;
+
+    }
+}
+@media (width < 768px) {
+    .changePassDesktopView{
+        display: none;
+    }
+    .changePassMobileView{
+        display: block;
+        margin: 20px 0;
+        padding-left: 16px;
+    }
+    .changePassFieldSection{
+        display: contents;
+    }
+}
+
+@media (max-width: 450px) {
+    .accountSettingsSections{
+        padding: 15px 10px !important;
+        overflow: hidden;
+    }
+    .accountSettingsBtn{
+        width: 125px !important;
+    }
+}

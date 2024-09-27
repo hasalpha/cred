@@ -1,0 +1,59 @@
+/* Banner Toggle Btn */
+.bannersToggleBtn {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+}
+.bannersToggleBtnSize{
+    position: relative;
+    transform: scale(0.6);
+  }
+.bannersToggleBtn > input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.bannersSlider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #9E9E9E;
+    transition: .4s;
+    border-radius: 25px;
+}
+.bannersSlider:before {
+    position: absolute;
+    content: "";
+    height: 35px;
+    width: 35px;
+    left: -10px;
+    bottom: -2px;
+    background-color: #ed642b;
+    transition: .4s;
+    border-radius: 50%;
+}
+.bannersSlider:hover:before{
+    background-color: #D94E32;
+}
+input:checked + .bannersSlider {
+    background-color: #250c77;
+}
+input:checked + .bannersSlider:before {
+    transform: translateX(35px);
+}
+
+/* Banner Preview Button */
+.bannersPreviewBtn{
+    color: #1396ed;
+    cursor: pointer;
+    transition: .4s ease-in-out;
+    transform: scale(1);
+}
+.bannersPreviewBtn:hover{
+    color: #ff0000;
+    transform: scale(1.06);
+}

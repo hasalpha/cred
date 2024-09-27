@@ -1,0 +1,11 @@
+export { default as AdminLogin } from './AdminLogin';
+export { default as AdminRegister } from './AdminRegister';
+export { default as AuthMessage } from './AuthMessage';
+export { default as ForgotPassword } from './ForgotPassword';
+export { default as ResetPassword } from './ResetPassword';
+export { default as ReVerifyEmail } from './ReVerifyEmail';
+export { default as SignIn } from './SignIn';
+export { default as SignUp } from './SignUp';
+export { default as SuperAdminLogin } from './SuperAdminLogin';
+export { default as SuperAdminRecoverAcc } from './SuperAdminRecoverAcc';
+export { default as UserVerified } from './UserVerified';
